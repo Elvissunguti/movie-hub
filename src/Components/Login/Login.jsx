@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LockClosedIcon } from '@heroicons/react/20/solid'
+
 
 const Login = () => {
     return(
@@ -47,8 +49,26 @@ const Login = () => {
                             </Link>
                         </div>
                     </div>
+                    <div>
+                       <p>display error</p>
+                    </div>
+                    <div>
+                        <button
+                        type="submit"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#40AA54] py-2 px-4 text-sm font-medium text-white hover:bg-[#40AA54]-700 focus:outline-none focus:ring-2 focus:ring-[#40AA54]-500 focus:ring-offset-2"
+                        >
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                               <LockClosedIcon className="h-5 w-5 text-[#40AA54]-500 group-hover:text-[#40AA54]-400" aria-hidden="true" /> 
+                            </span>
+                            <p>show loading or login</p>
 
+                        </button>
+                    </div>
                 </form>
+                <div>
+                    <Link to="/register" >Don't have an account?<span className="text-[#40AA54] font-bold">Register</span></Link>
+                    
+                </div>
             </div>
         </div>
         </>
