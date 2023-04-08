@@ -5,12 +5,14 @@ import Login from './Components/Login/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ForgotPassword from './Components/Forgot password/ForgotPassword';
 import Register from './Components/Register/Register';
+import Home from './Components/Home/Home';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/register' element={<Register />} />
     
