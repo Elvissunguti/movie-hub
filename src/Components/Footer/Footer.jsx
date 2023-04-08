@@ -35,6 +35,9 @@ const Footer = () => {
                     <p>Legal Notices</p>
                 </div>
             </div>
+            <div className="mx-4">
+                <p className="text-white-100">Copyright @ 2023 MOVIE-HUB</p>
+            </div>
         </div>
     )
 
