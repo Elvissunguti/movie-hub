@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "../Assets/logo.jpg";
 import { useSelector } from "react-redux";
 import { AiOutlineLogout } from "react-icons/ai";
+import { createImageFromInitials } from "../Utils/getInitials";
+import { getRandomColor } from "../Utils/getRandomColor";
 
 
 const NavBar = () => {
@@ -51,7 +53,11 @@ const NavBar = () => {
                 ) : (
                     <div>
                         <li>
-                            <img  alt="" />
+                            <img src={createImageFromInitials(
+                                500, 
+                                user?.fullname,
+                                getRandomColor()
+                            )} alt="" />
                             <AiOutlineLogout className="cursor-pointer text-xl" />
                         </li>
                     </div>
