@@ -51,7 +51,7 @@ const NavBar = () => {
                 ) : (
                     <div>
                         <li>
-                            <img alt="" />
+                            <img  alt="" />
                             <AiOutlineLogout className="cursor-pointer text-xl" />
                         </li>
                     </div>
