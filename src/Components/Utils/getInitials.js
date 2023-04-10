@@ -19,7 +19,7 @@ export const createImageFromInitials = (size, name, color) => {
 
     const canvas=document.createElement('canvas')
     const context=canvas.getContext('2d')
-    canvas.width=canvas.height=size
+    canvas.width=canvas.height=size 
 
     context.fillStyle="#ffffff"
     context.fillRect(0,0,size,size)
