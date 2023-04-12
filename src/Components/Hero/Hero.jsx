@@ -4,12 +4,12 @@ import React from "react";
 const Hero = () => {
     return(
         <div className="w-full h-screen relative">
-        <div className="absolute inset-0 bg-custom"></div>
+        <div className="absolute inset-0 bg-custom">
         <div className="relative z-10 text-white flex flex-col items-center justify-center ">
           <h2 className="text-5xl font-bold ">Unlimited movies, TV shows, and more.</h2>
-          <p className="text-2xl ">Watch anywhere. Cancel anytime.</p>
-          <p className="text-xl">Ready to watch? Enter your email to create or restart your membership.</p>
-          <div className="gap-2 flex items-center justify-center ">
+          <p className="text-2xl mt-4 ">Watch anywhere. Cancel anytime.</p>
+          <p className="text-xl mt-4">Ready to watch? Enter your email to create or restart your membership.</p>
+          <div className="gap-2 flex items-center justify-center mt-2 ">
             <div>
             <input 
             name="email"
@@ -27,6 +27,7 @@ const Hero = () => {
             Get Started &gt;</button>
          </div>
          
+          </div>
           </div>
         </div>
       </div>
