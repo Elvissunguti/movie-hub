@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.bg-custom::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  background-image: url(./Components/Assets/moviebg.jpg);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7)
+  }

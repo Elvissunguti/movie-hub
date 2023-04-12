@@ -1,15 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineLogout } from "react-icons/ai";
 import { createImageFromInitials } from "../Utils/getInitials";
 import { getRandomColor } from "../Utils/getRandomColor";
+import { logout } from "../Assets/Redux/Slices/UserSlice";
 
 
 const NavBar = () => {
 
     const user = useSelector((state) => state?.user.user);
+  const dispatch = useDispatch();
+
+
+    const Logout = () => {
+        const confirmed = window.confirm("Are you sure you want to logout?");
+        if (confirmed) return dispatch(logout());
+      };
 
     const navLinks = [
         {name: "Home"},
@@ -37,31 +45,7 @@ const NavBar = () => {
                         </Link>
                     </li>
                 ))}
-                {user === null ? (
-                    <>
-                    <li>
-                        <Link to="/register">
-                        Register
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/login">
-                        Login
-                        </Link>
-                    </li>
-                    </>
-                ) : (
-                    <div>
-                        <li>
-                            <img src={createImageFromInitials(
-                                500, 
-                                user?.fullname,
-                                getRandomColor()
-                            )} alt="" />
-                            <AiOutlineLogout className="cursor-pointer text-xl" />
-                        </li>
-                    </div>
-                )}
+  
             </ul>
         </div>
        </div>

@@ -9,6 +9,7 @@ const Footer = () => {
             <div className="flex flex-col justify-between py-5 px-2 mx-auto max-w-4xl md:flex-row xl:max-w-6xl xl:px-0">
                 <div className="flex flex-col">
                     <p className="font-semibold text-white mb-2 text-lg">MOVIE HUB</p>
+                    <p>Questions? Contact us</p>
                     <div className="flex gap-2 text-[20px] footer-icons">
                         <CiFacebook />
                         <CiInstagram />
