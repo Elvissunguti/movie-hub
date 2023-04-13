@@ -57,22 +57,26 @@
   
   .panel-header {
     background-color: gray;
-    padding: 10px;
+    padding: 20px;
     cursor: pointer;
     position: relative;
+    font-size:x-large;
   }
   
   .panel-header:after {
-    content: "\25BC";
+    content: "\002b";
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 15px;
     transform: translateY(-50%);
     transition: transform 0.3s;
+    
+    
+    
   }
   
   .panel-header.open:after {
-    transform: translateY(-50%) rotate(-180deg);
+    content: "\2212";
   }
   
   .panel-body {
@@ -80,6 +84,7 @@
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease-out;
+    font-size: 18px;
   }
   
   .panel-body.open {
