@@ -48,6 +48,11 @@ const NavBar = () => {
   
             </ul>
         </div>
+        <Link to="/sign in">
+        <button>
+            Sign In
+        </button>
+        </Link>
        </div>
     )
 }
