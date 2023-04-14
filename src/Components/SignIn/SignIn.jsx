@@ -32,6 +32,11 @@ const SignIn = () => {
                             </button>
                             </Link>
                         </div>
+                        <div>
+                            <p>
+                                New to Movie-Hub? <a href="#" className="text-red-500 hover:text-underline" >Sign up Now</a>.
+                            </p>
+                        </div>
                     </form>
 
                 </div>
