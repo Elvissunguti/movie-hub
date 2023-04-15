@@ -7,8 +7,9 @@ const SignIn = () => {
             <div className="w-full h-screen relative">
                 <div className="bg-custom absolute inset-0">
                     <form className="relative z-10 text-white">
-                        <div className="relative">
+                        <div className="flex flex-col gap-5 items-center justify-center">
                             <h2>Sign In</h2>
+                            <label>
                             <input
                             type="email"
                             name="email"
@@ -16,6 +17,8 @@ const SignIn = () => {
                             placeholder="Email or phone number"
                             className=""
                             />
+                            </label>
+                            <label>
                             <input
                             type="password"
                             name="password"
@@ -23,10 +26,11 @@ const SignIn = () => {
                             placeholder="Password"
                             className=""
                             />
+                            </label>
                             
                         </div>
                         <div>
-                            <Link to="/login">
+                            <Link to="/browse page">
                             <button>
                                 Sign In
                             </button>
@@ -34,7 +38,7 @@ const SignIn = () => {
                         </div>
                         <div>
                             <p>
-                                New to Movie-Hub? <a href="#" className="text-red-500 hover:text-underline" >Sign up Now</a>.
+                                New to Movie-Hub? <Link to="/login" className="text-red-500 hover:text-underline" >Sign up Now</Link>.
                             </p>
                         </div>
                     </form>

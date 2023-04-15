@@ -7,6 +7,7 @@ import ForgotPassword from './Components/Forgot password/ForgotPassword';
 import Register from './Components/Register/Register';
 import Home from './Components/Home/Home';
 import SignIn from './Components/SignIn/SignIn';
+import BrowsePage from './Components/BrowsePage/BrowsePage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/sign in' element={<SignIn />} />
+        <Route path="/browse page" element={<BrowsePage />}  />
     
       </Routes>
       </BrowserRouter>
