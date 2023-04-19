@@ -2,12 +2,16 @@ import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Row from "./Row";
 import requests from "../../request";
+import Banner from "./Banner";
 
 const BrowsePage = () => {
     return(
         <section>
             <div>
                 <NavBar />
+            </div>
+            <div>
+                <Banner />
             </div>
             <div>
             <Row
