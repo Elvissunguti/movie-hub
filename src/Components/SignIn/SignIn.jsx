@@ -38,7 +38,7 @@ const SignIn = () => {
                         </div>
                         <div>
                             <p>
-                                New to Movie-Hub? <Link to="/login" className="text-red-500 hover:text-underline" >Sign up Now</Link>.
+                                New to Movie-Hub? <Link to="/" className="text-red-500 hover:text-underline" >Sign up Now</Link>.
                             </p>
                         </div>
                     </form>

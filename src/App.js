@@ -8,6 +8,7 @@ import Register from './Components/Register/Register';
 import Home from './Components/Home/Home';
 import SignIn from './Components/SignIn/SignIn';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
+import Hero from './Components/Hero/Hero';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/sign in' element={<SignIn />} />
         <Route path="/browse page" element={<BrowsePage />}  />
+        
     
       </Routes>
       </BrowserRouter>

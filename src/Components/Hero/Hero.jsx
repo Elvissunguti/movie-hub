@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const Hero = () => {
@@ -18,13 +19,14 @@ const Hero = () => {
            required
            autoComplete="email"
            id="email"
-           className="text-white  px-2 py-4 bg-black opacity-50 border "
+           className="text-white px-2 py-4 bg-black opacity-50 border "
            />
             
-         
+         <Link to='/login'>
          <button 
-           className="text-xl p-4  bg-[#ff0000] font-semibold my-2 hover:bg-red-900 duration tr">
+           className="text-xl p-4 bg-[#ff0000] font-semibold my-2 hover:bg-red-900 duration tr">
             Get Started &gt;</button>
+            </Link>
          
          
           </div>
