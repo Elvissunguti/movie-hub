@@ -44,7 +44,7 @@
   display: block;
   position: absolute;
   inset: 0;
-  background-image: url(./Components/Assets/moviebg.jpg);
+  background-image: url(./Components/Assets/bg-image.jpg);
   background-size: cover;
   background-position: center;
   filter: brightness(0.7)
