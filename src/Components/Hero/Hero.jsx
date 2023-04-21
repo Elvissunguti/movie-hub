@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
     return(
-        <div className="w-full h-screen mx-auto">
-        <div className="bg-custom inset-0 relative">
+        <div className="w-full h-screen mx-auto relative">
+        <div className="bg-custom inset-0 absolute">
         <div className=" absolute w-full h-screen text-white space-y-5 flex flex-col justify-center items-center ">
           <h2 className="text-5xl font-bold ">Unlimited movies, TV shows, and more.</h2>
           <p className="text-2xl font-semibold">Watch anywhere. Cancel anytime.</p>
