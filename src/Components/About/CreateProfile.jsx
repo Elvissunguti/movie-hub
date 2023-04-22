@@ -4,7 +4,7 @@ import createProfile from "../Assets/createProfile.png";
 const CreateProfile = () => {
     return(
         <section className="bg-[#000000] border-b-8 border-gray-800 border-solid">
-            <div className="flex flex-col-reverse lg:flex-row max-w-4xl xl:max-w-6xl mx-auto">
+            <div className="my-6 flex flex-col-reverse lg:flex-row max-w-4xl xl:max-w-6xl mx-auto">
                 <div className="lg:w-1/2 ">
                     <img src={createProfile} alt="" />
                 </div>

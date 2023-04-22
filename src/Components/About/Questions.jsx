@@ -4,15 +4,29 @@ import { data } from "./AboutData";
 const Questions = () => {
 
     const [openIndex, setOpenIndex] = useState(-1);
+    const [ email , setEmail] = useState("");
+    const [isFocused , setIsFocused ] = useState(false);
 
     const handlePanelClick = (index) => {
       setOpenIndex((prevIndex) => (prevIndex === index ? -1 : index));
     };
 
+    const handleInputChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handleInputFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleInputBlur = () => {
+        setIsFocused(false);
+    };
+
 
     return(
         <section className="bg-[#000000] border-b-8 border-gray-500 border-solid">
-            <div className="max-w-4xl xl:max-w-6xl mx-auto mt-8 ">
+            <div className="max-w-4xl xl:max-w-6xl mx-auto my-6 ">
                 <div className="text-white  ">
                     <h2 className="text-5xl font-bold">
                         Frequently Asked Questions
@@ -33,16 +47,27 @@ const Questions = () => {
                 </div>
                 <div className="text-white py-8">
                     <p className="text-xl">Ready to watch? Enter your email to create or restart your membership.</p>
-                    <div className="gap-2 flex items-center justify-center mt-2 ">
-            <div>
+                    <div className="gap-2 relative flex items-center justify-center mt-2 ">
+            <div className="relative">
+                <label htmlFor="email"
+                  className={`absolute transition-all duration-200 pointer-events-none ${
+                    isFocused || email ? 'text-sm text-gray-500 top-0' : 'text-base text-gray-400'
+                  }`}
+                  >
+                    Email address
+                </label>
             <input 
             name="email"
            type="email"
-           placeholder="Email address"
+           value={email}
+           placeholder=" "
            required
            autoComplete="email"
            id="email"
-           className="text-white  px-2 py-4 bg-black opacity-50 border border-green-400 "
+           onChange={handleInputChange}
+           onFocus={handleInputFocus}
+           onBlur={handleInputBlur}
+           className="text-white px-8 py-4 bg-black opacity-50 border border-rounded-xl border-green-400 "
            />
             </div>
          <div>
