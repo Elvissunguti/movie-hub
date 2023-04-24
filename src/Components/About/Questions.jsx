@@ -26,7 +26,7 @@ const Questions = () => {
 
     return(
         <section className="bg-[#000000] border-b-8 border-gray-500 border-solid">
-            <div className="max-w-4xl xl:max-w-6xl mx-auto my-6 ">
+            <div className="max-w-5xl xl:max-w-6xl mx-auto my-6 px-6 ">
                 <div className="text-white  ">
                     <h2 className="text-5xl font-bold">
                         Frequently Asked Questions
@@ -51,7 +51,7 @@ const Questions = () => {
             <div className="relative">
                 <label htmlFor="email"
                   className={`absolute transition-all duration-200 pointer-events-none ${
-                    isFocused || email ? 'text-sm text-gray-500 top-0' : 'text-base text-gray-400'
+                    isFocused || email ? 'text-sm text-gray-500 top-0' : 'text-base text-gray-400 top-4'
                   }`}
                   >
                     Email address
@@ -67,7 +67,7 @@ const Questions = () => {
            onChange={handleInputChange}
            onFocus={handleInputFocus}
            onBlur={handleInputBlur}
-           className="text-white px-8 py-4 bg-black opacity-50 border border-rounded-xl border-green-400 "
+           className="text-white px-8 py-4 bg-black opacity-50 border rounded-lg border-green-400 "
            />
             </div>
          <div>

@@ -43,7 +43,7 @@ const Hero = () => {
            required
            autoComplete="email"
            id="email"
-           className="text-white px-16 py-4 bg-black opacity-50 border "
+           className="text-white px-16 py-4 bg-black opacity-50 border rounded-lg "
            value={email}
            onChange={handleInputChange}
            onFocus={handleInputFocus}

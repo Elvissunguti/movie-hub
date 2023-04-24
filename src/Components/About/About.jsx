@@ -15,7 +15,7 @@ const About = () => {
         {name: Questions},
     ];
     return(
-        <div className="bg-[#000000]">
+        <div className="bg-[#000000] ">
           <div>
             {components.map((component, i) => (
                 <div key={i} className="">
