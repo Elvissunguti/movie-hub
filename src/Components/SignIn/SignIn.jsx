@@ -5,7 +5,8 @@ const SignIn = () => {
 
     const [ email, setEmail] = useState('');
     const [ password, setPassword] = useState('');
-    const [ isFocused, setIsFocused] = useState(false);
+    const [ isFocusedEmail, setIsFocusedEmail] = useState(false);
+    const [ isFocusedPassword, setIsFocusedPassword] = useState(false);
 
     const handleInputChangeEmail = (e) => {
         setEmail(e.target.value)
@@ -15,24 +16,33 @@ const SignIn = () => {
         setPassword(e.target.value)
     }
 
-    const handleInputFocus = () => {
-        setIsFocused(true);
+    const handleInputFocusEmail = () => {
+        setIsFocusedEmail(true);
     };
 
-    const handleInputBlur = () => {
-        setIsFocused(false)
+    const handleInputFocusPassword = () => {
+        setIsFocusedPassword(true);
+    };
+
+    const handleInputBlurEmail = () => {
+        setIsFocusedEmail(false)
+    }
+
+    const handleInputBlurPassword = () => {
+        setIsFocusedPassword(false)
     }
     return(
         <section className="">
             <div className="w-full h-screen mx-auto relative">
                 <div className="bg-custom absolute inset-0">
-                    <form className="absolute w-full h-screen flex items-center justify-center flex-col text-white">
+                    <form className="absolute w-full h-screen flex items-center justify-center flex-col ">
+                        <div className="bg-black py-28 px-16 bg-opacity-70">
                         <div className="flex flex-col space-y-5 items-center justify-center">
-                            <h2 className="text-3xl font-bold">Sign In</h2>
-                            <div>
+                            <h2 className="text-white text-3xl font-bold">Sign In</h2>
+                            <div className="relative ">
                             <label htmlFor="email"
                                     className={`absolute transition-all duration-200 pointer-events-none ${
-                                        isFocused || email ? 'text-sm text-gray-500 top-0 ' : 'text-base text-gray-400'
+                                        isFocusedEmail || email ? 'text-sm text-gray-500 top-0 ' : 'text-base text-gray-400 top-3'
                                       }`}
                             >
                                 Email Or phone number
@@ -46,19 +56,19 @@ const SignIn = () => {
                             autoComplete="email"
                             required
                             placeholder=" "
-                            className=""
+                            className="px-16 py-3 text-black-500 rounded-lg focus:outline-none"
                             onChange={handleInputChangeEmail}
-                            onFocus={handleInputFocus}
-                            onBlur={handleInputBlur}
+                            onFocus={handleInputFocusEmail}
+                            onBlur={handleInputBlurEmail}
                             />
                             </div>
 
 
 
-                            <div>
+                            <div className="relative">
                             <label htmlFor="password"
                              className={`absolute transition-all duration-200 pointer-events-none ${
-                                isFocused || password ? 'text-sm text-gray-500 top-3' : 'text-base text-gray-400'
+                                isFocusedPassword || password ? 'text-sm text-gray-500 top-0' : 'text-base text-gray-400 top-3'
                              }`}
                              >
                                 Password
@@ -70,10 +80,10 @@ const SignIn = () => {
                             required
                             value={password}
                             placeholder=" "
-                            className="text-black"
+                            className="px-16 py-3 rounded-lg focus:outline-none"
                             onChange={handleInputChangePassword}
-                            onFocus={handleInputFocus}
-                            onBlur={handleInputBlur}
+                            onFocus={handleInputFocusPassword}
+                            onBlur={handleInputBlurPassword}
                             />
                             </div>
                             
@@ -81,20 +91,20 @@ const SignIn = () => {
                         </div>
                         <div>
                             <Link to="/browse page">
-                            <button>
+                            <button className="bg-red-800 text-white my-4 px-16 py-3 text-lg font-bold rounded-lg">
                                 Sign In
                             </button>
                             </Link>
                         </div>
                         <div>
-                            <p>
+                            <p className="text-white">
                                 New to Movie-Hub? <Link to="/" className="text-red-500 hover:text-underline" >Sign up Now</Link>.
                             </p>
                         </div>
+                        </div>
                     </form>
 
-                </div>
-                
+                </div> 
             </div>
         </section>
     )
