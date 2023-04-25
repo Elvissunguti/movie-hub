@@ -91,7 +91,7 @@ const SignIn = () => {
                         </div>
                         <div>
                             <Link to="/browse page">
-                            <button className="bg-red-800 text-white my-4 px-16 py-3 text-lg font-bold rounded-lg">
+                            <button className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
                                 Sign In
                             </button>
                             </Link>
