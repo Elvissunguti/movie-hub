@@ -51,7 +51,9 @@ const Login = () => {
         <section className="">
         <div className="w-full h-screen mx-auto relative">
             <div className="bg-custom absolute inset-0">
-                <form className="absolute w-full h-screen flex items-center justify-center flex-col ">
+                
+                <form action="/signup" method="post"
+                 className="absolute w-full h-screen flex items-center justify-center flex-col ">
                     <div className="bg-black py-28 px-16 bg-opacity-70">
                     <div className="flex flex-col space-y-5 items-center justify-center">
                         <h2 className="text-white text-3xl font-bold">Sign Up</h2>
