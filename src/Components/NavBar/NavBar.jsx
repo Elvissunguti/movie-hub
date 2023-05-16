@@ -31,7 +31,7 @@ const NavBar = () => {
         <img src={logo} alt="logo" className="h-20 w-auto"/>
         </Link>
         <div className="flex flex-row items-center space-x-16">
-            <ul className="hidden items-center flex-row md:flex">
+            <ul className="hidden items-center flex-row">
                 {navLinks.map((navLink, i) => (
                     <li key={i}
                      className="p-4 text-lg font-semibold hover:text-[#40AA54] text-[#16162E] active:text-[#40AA54] transition duration-500 focus:text-[#40AA54] ">

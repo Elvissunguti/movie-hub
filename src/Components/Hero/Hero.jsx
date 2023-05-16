@@ -27,6 +27,7 @@ const Hero = () => {
           <p className="text-2xl font-semibold">Watch anywhere. Cancel anytime.</p>
           <p className="text-xl font-semibold ">Ready to watch? Enter your email to create or restart your membership.</p>
           <div className="gap-2 flex items-center justify-center mt-2 relative">
+            <form>
 
           <label
         htmlFor="email"
@@ -49,6 +50,7 @@ const Hero = () => {
            onFocus={handleInputFocus}
            onBlur={handleInputBlur}
            />
+           </form>
             
          <Link to='/login'>
          <button 
