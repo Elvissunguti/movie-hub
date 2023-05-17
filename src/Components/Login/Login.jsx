@@ -10,6 +10,31 @@ const Login = () => {
     const [ isFocusedEmail, setIsFocusedEmail] = useState(false);
     const [ isFocusedPassword, setIsFocusedPassword] = useState(false);
 
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const response = await fetch('/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName, email, password }),
+          });
+    
+          if (response.ok) {
+            // Sign up successful, do something (e.g., redirect to login page)
+            console.log('Sign up successful');
+          } else {
+            // Handle sign up error
+            const errorData = await response.json();
+            console.log(errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
 
     const handleInputChangeFirstName = (e) => {
         setFirstName(e.target.value)
@@ -52,7 +77,7 @@ const Login = () => {
         <div className="w-full h-screen mx-auto relative">
             <div className="bg-custom absolute inset-0">
                 
-                <form action="/signup" method="post"
+                <form onSubmit={handleSignUp}
                  className="absolute w-full h-screen flex items-center justify-center flex-col ">
                     <div className="bg-black py-28 px-16 bg-opacity-70">
                     <div className="flex flex-col space-y-5 items-center justify-center">

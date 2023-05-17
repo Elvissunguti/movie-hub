@@ -12,25 +12,16 @@ const app = express();
 
 const mongoURI = 'mongodb+srv://MovieHub:MovieHub@cluster0.jtynzmk.mongodb.net/MovieHubDb?retryWrites=true&w=majority';
 
-mongodb.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, (err, client) => {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, (err, client) => {
     if(err){
         console.log(err);
         return
     }
 
     const db = client.db('MovieHubDb');
-    const users = db.collection("users");
+    const user = db.collection("user");
 });
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true}))
-
-app.get('/', (req, res) => {
-    res.sendFile(process.cwd() + "/login/login.jsx")
-})
-
-
+ 
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -49,9 +40,20 @@ const userSchema = new mongoose.Schema({
      },
 })
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-app.post("/signup", async( req, res) => {
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}))
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "/Login/Login.jsx")
+});
+
+
+
+
+app.post("/signup", async ( req, res) => {
     try{
         const { firstName, email, password } = req.body;
 
@@ -61,13 +63,13 @@ app.post("/signup", async( req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const User = new User({
+        const user = new User({
             firstName,
             email,
             password: hashedPassword,
         });
 
-        await userSchema.save()
+        await user.save()
 
         res.status(201).json({ message: "User created successfully"});
     } catch (error){
