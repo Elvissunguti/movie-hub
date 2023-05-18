@@ -4,15 +4,18 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+require('dotenv').config()
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 
 
 
-const mongoURI = 'mongodb+srv://MovieHub:MovieHub@cluster0.jtynzmk.mongodb.net/MovieHubDb?retryWrites=true&w=majority';
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, (err, client) => {
+
+mongoose.connect(process.env.mongoURL, { useNewUrlParser: true, useUnifiedTopology: true}, (err, client) => {
     if(err){
         console.log(err);
         return
@@ -22,25 +25,24 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, (
     const user = db.collection("user");
 });
  
-const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-        unique: true,
+const User = mongoose.model('User', {
+    username: {
+      type: String,
+      required: true,
+      unique: true
     },
-     email: {
-        type: String,
-        required: true,
-        unique: true,
-     },
-     password: {
-        type: String,
-        required: true,
-        
-     },
-})
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true
+    }
+  });
 
-const User = mongoose.model('User', userSchema);
+
 
 app.use(cors());
 app.use(express.json());
@@ -53,11 +55,12 @@ app.get('/', (req, res) => {
 
 
 
-app.post("/signup", async ( req, res) => {
+app.post("/login", async ( req, res) => {
     try{
         const { firstName, email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
+
         if (existingUser){
             return res.status(409).json({ message: "User already exists"})
         }
@@ -78,6 +81,6 @@ app.post("/signup", async ( req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
   });

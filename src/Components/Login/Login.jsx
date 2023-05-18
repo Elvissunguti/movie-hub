@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const [ firstName, setFirstName] = useState("");
     const [ email, setEmail] = useState('');
@@ -14,7 +16,7 @@ const Login = () => {
         e.preventDefault();
     
         try {
-          const response = await fetch('/signup', {
+          const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -23,6 +25,7 @@ const Login = () => {
           });
     
           if (response.ok) {
+            navigate('/browse page');
             // Sign up successful, do something (e.g., redirect to login page)
             console.log('Sign up successful');
           } else {
@@ -78,7 +81,7 @@ const Login = () => {
             <div className="bg-custom absolute inset-0">
                 
                 <form onSubmit={handleSignUp}
-                 className="absolute w-full h-screen flex items-center justify-center flex-col ">
+                 className="absolute w-full h-screen flex items-center justify-center flex-col">
                     <div className="bg-black py-28 px-16 bg-opacity-70">
                     <div className="flex flex-col space-y-5 items-center justify-center">
                         <h2 className="text-white text-3xl font-bold">Sign Up</h2>
@@ -157,11 +160,12 @@ const Login = () => {
                         
                     </div>
                     <div>
-                        <Link to="/browse page">
-                        <button className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
+                        
+                        <button type="submit"
+                        className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
                             Sign In
                         </button>
-                        </Link>
+                        
                     </div>
                  
                     </div>
