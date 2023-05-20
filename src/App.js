@@ -12,6 +12,11 @@ import Hero from './Components/Hero/Hero';
 
 
 function App() {
+
+  const dbConnect = require("./Server");
+  dbConnect();
+
+
   return (
     <div className="App">
       <BrowserRouter>
