@@ -78,6 +78,29 @@ app.post("/signup", async (req, res) => {
 
 // Login endpoint
 
+app.post("/login", async (req, res) => {
+  try{
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email })
+    if (!user) {
+      return res.json({ message: 'User not found' });
+    }
+
+    const passwordMatch = await bcrypt.compare( password, user.password);
+    if (!passwordMatch){
+      return res.json({ message: 'Password incorrect' });
+    }
+    res.status(200).json({ message: 'Login successful' });
+
+
+
+  } catch(error){
+    console.error(error);
+    res.json({ message: "Login Error"})
+  }
+})
+
 
 // Start the server
 app.listen(PORT, () => {
