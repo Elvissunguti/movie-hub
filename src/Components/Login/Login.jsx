@@ -1,37 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
 
     const navigate = useNavigate();
 
-    const [ firstName, setFirstName] = useState("");
-    const [ email, setEmail] = useState('');
-    const [ password, setPassword] = useState('');
+    const [ firstName, setFirstName ] = useState("");
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
     const [ isFocusedFirstName, setIsFocusedFirstName ] = useState(false);
-    const [ isFocusedEmail, setIsFocusedEmail] = useState(false);
-    const [ isFocusedPassword, setIsFocusedPassword] = useState(false);
+    const [ isFocusedEmail, setIsFocusedEmail ] = useState(false);
+    const [ isFocusedPassword, setIsFocusedPassword ] = useState(false);
 
     const handleSignUp = async (e) => {
         e.preventDefault();
     
         try {
-          const response = await fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ firstName, email, password }),
-          });
-    
-          if (response.ok) {
-            navigate('/browse page');
-            // Sign up successful, do something (e.g., redirect to login page)
-            console.log('Sign up successful');
-          } else {
+            const response = await axios.post('http://localhost:3000/signup', { firstName, email, password });
+            console.log(response.data);
+          
+          if (!response) {
             // Handle sign up error
             const errorData = await response.json();
             console.log(errorData.message);
+           
+          } else {
+            navigate('/browse page');
+            // Sign up successful, do something (e.g., redirect to login page)
+            console.log('Sign up successful');
+            
           }
         } catch (error) {
           console.error('Error:', error);
