@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB Atlas
 mongoose.connect(
-  'mongodb+srv://Elvis:elvis@cluster0.jtynzmk.mongodb.net/database?retryWrites=true&w=majority',
+  'mongodb://Elvis:elvis@ac-fttkyf7-shard-00-00.jtynzmk.mongodb.net:27017,ac-fttkyf7-shard-00-01.jtynzmk.mongodb.net:27017,ac-fttkyf7-shard-00-02.jtynzmk.mongodb.net:27017/database?ssl=true&replicaSet=atlas-hbjmuw-shard-0&authSource=admin&retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true }
 ).then(() => {
   console.log('Connected to MongoDB Atlas!');
@@ -41,8 +41,6 @@ const User = mongoose.model('User', {
     required: true
   }
 });
-
-
 
 
 // Sign-up endpoint
@@ -77,29 +75,35 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login endpoint
-
 app.post("/login", async (req, res) => {
+
+  const { email, password } = req.body;
+
   try{
-    const { email, password } = req.body;
-
     const user = await User.findOne({ email })
-    if (!user) {
-      return res.json({ message: 'User not found' });
+
+    if(!user) {
+      return res.json({ message: "Authentication failed"});
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.json({ message : "incorrect password" })
     }
 
-    const passwordMatch = await bcrypt.compare( password, user.password);
-    if (!passwordMatch){
-      return res.json({ message: 'Password incorrect' });
-    }
-    res.status(200).json({ message: 'Login successful' });
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      'secret_key' // Replace with your own secret key
+    );
+
+    return res.json({ token })
 
 
 
   } catch(error){
     console.error(error);
-    res.json({ message: "Login Error"})
+    res.status(500).json({ message: 'Error logging in' });
   }
-})
+});
 
 
 // Start the server

@@ -14,7 +14,7 @@ const SignIn = () => {
         e.preventDefault();
     
         try {
-          const response = await fetch('/login', {
+          const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -22,16 +22,18 @@ const SignIn = () => {
             body: JSON.stringify({ email, password }),
           });
     
-          if (response.ok) {
-            // Login successful, do something (e.g., store token in local storage)
+          if (!response) {
+        
+
+            const errorData = await response.json();
+            console.log(errorData.message);
             
+          
+            
+          } else {
             navigate('/browse page');
             console.log('Login successful');
             
-          } else {
-            // Handle login error
-            const errorData = await response.json();
-            console.log(errorData.message);
           }
         } catch (error) {
           console.error('Error:', error);
@@ -93,8 +95,6 @@ const SignIn = () => {
                             onBlur={handleInputBlurEmail}
                             />
                             </div>
-
-
 
                             <div className="relative">
                             <label htmlFor="password"

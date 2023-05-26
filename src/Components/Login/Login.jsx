@@ -27,7 +27,7 @@ const Login = () => {
            
           } else {
             navigate('/browse page');
-            // Sign up successful, do something (e.g., redirect to login page)
+            
             console.log('Sign up successful');
             
           }
