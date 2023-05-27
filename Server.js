@@ -92,7 +92,7 @@ app.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, email: user.email },
-      'secret_key' // Replace with your own secret key
+      'secret_key' // secret key
     );
 
     return res.json({ token })
@@ -105,6 +105,13 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
+
+// logout endpoint`
+app.post('/logout', (req, res) => {
+  const redirectUrl = "/";
+  return res.json({ message : "Logout Successful", redirectUrl})
+})
 
 // Start the server
 app.listen(PORT, () => {

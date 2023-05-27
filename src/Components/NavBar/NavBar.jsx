@@ -1,30 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineLogout } from "react-icons/ai";
 import { createImageFromInitials } from "../Utils/getInitials";
 import { getRandomColor } from "../Utils/getRandomColor";
-import { logout } from "../Assets/Redux/Slices/UserSlice";
+
 
 
 const NavBar = () => {
+  const navigate = useNavigate();
 
-    const user = useSelector((state) => state?.user.user);
-  const dispatch = useDispatch();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
-    const Logout = () => {
-        const confirmed = window.confirm("Are you sure you want to logout?");
-        if (confirmed) return dispatch(logout());
-      };
 
     const navLinks = [
         {name: "Home"},
         {name: "About"},
         {name: "Contacts"}
     ];
+   
+    const handleLogout = async () => {
+      try {
+        // Call the logout endpoint
+        const response = await fetch('/logout', {
+          method: 'POST',
+        });
+        const data = await response.json();
+  
+        // Redirect to the specified page after logout
+        navigate(data.redirectUrl);
+        setIsAuthenticated(false);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
+    const login = () => {
+      setIsAuthenticated(true)
+    }
+    
     return (
        <div className="mx-auto flex justify-center items-center max-w-4xl xl:max-w-6xl">
         <Link>
@@ -45,14 +60,32 @@ const NavBar = () => {
                         </Link>
                     </li>
                 ))}
+
+                {isAuthenticated ? (
+                    <div className="relative h-max flex flex-row items-center">
+              <li className="p-4 hover:text-[#40AA54] text-[#16162E] active:text-[#40AA54] transition duration-500 focus:text-[#40AA54]">
+                <AiOutlineLogout onClick={handleLogout}
+                className="cursor-pointer text-xl"/>
+              </li>
+              </div>
+
+                ) : (
+                  
+            <div onClick={login}>
+            <li>
+                <Link
+                 to="/login"
+                 className=""
+                 >
+                    Sign in
+                </Link>
+            </li>
+            </div>
+                )}
   
             </ul>
         </div>
-        <Link to="/sign in">
-        <button>
-            Sign In
-        </button>
-        </Link>
+        
        </div>
     )
 }
