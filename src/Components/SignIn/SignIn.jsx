@@ -13,29 +13,32 @@ const SignIn = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
     
+        const userData = {
+          email: email,
+          password: password
+        };
+    
         try {
           const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify(userData)
           });
     
-          if (!response) {
-        
-
-            const errorData = await response.json();
-            console.log(errorData.message);
-            
-          
-            
+          if (response.ok) {
+            // Success! User signed up successfully
+            // You can redirect the user or show a success message
+            navigate("/browse page")
+            console.log('User signed up successfully');
           } else {
-            navigate('/browse page');
-            console.log('Login successful');
-            
+            // Handle sign-up error
+            // You can show an error message to the user
+            console.error('Sign up failed');
           }
         } catch (error) {
+          // Handle any network or server errors
           console.error('Error:', error);
         }
       };
@@ -78,8 +81,8 @@ const SignIn = () => {
                                         isFocusedEmail || email ? 'text-sm text-gray-500 top-0 ' : 'text-base text-gray-400 top-3'
                                       }`}
                             >
-                                Email Or phone number
-                                </label>
+                                Email
+                            </label>
 
                             <input
                             type="email"

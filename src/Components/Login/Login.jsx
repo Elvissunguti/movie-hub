@@ -113,7 +113,7 @@ const Login = () => {
                                     isFocusedEmail || email ? 'text-sm text-gray-500 top-0 ' : 'text-base text-gray-400 top-3'
                                   }`}
                         >
-                            Email Or phone number
+                            Email 
                             </label>
 
                         <input
@@ -161,7 +161,7 @@ const Login = () => {
                         
                         <button type="submit"
                         className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
-                            Sign In
+                            Sign Up
                         </button>
                         
                     </div>

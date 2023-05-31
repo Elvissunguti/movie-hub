@@ -24,6 +24,19 @@ mongoose.connect(
   console.error('Error connecting to MongoDB Atlas:', err);
 });
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
+
 // User model
 const User = mongoose.model('User', {
   firstName: {
@@ -75,43 +88,67 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login endpoint
-app.post("/login", async (req, res) => {
+app.post("/login", (request, response) => {
+  // check if email exists
+  User.findOne({ email: request.body.email })
 
-  const { email, password } = req.body;
+    // if email exists
+    .then((user) => {
+      // compare the password entered and the hashed password found
+      bcrypt
+        .compare(request.body.password, user.password)
 
-  try{
-    const user = await User.findOne({ email })
+        // if the passwords match
+        .then((passwordCheck) => {
 
-    if(!user) {
-      return res.json({ message: "Authentication failed"});
-    }
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.json({ message : "incorrect password" })
-    }
+          // check if password matches
+          if(!passwordCheck) {
+            return response.status(400).send({
+              message: "Passwords does not match",
+              error,
+            });
+          }
 
-    const token = jwt.sign(
-      { userId: user._id, email: user.email },
-      'secret_key' // secret key
-    );
+          //   create JWT token
+          const token = jwt.sign(
+            {
+              userId: user._id,
+              userEmail: user.email,
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+          );
 
-    return res.json({ token })
-
-
-
-  } catch(error){
-    console.error(error);
-    res.status(500).json({ message: 'Error logging in' });
-  }
+          //   return success response
+          response.status(200).send({
+            message: "Login Successful",
+            email: user.email,
+            token,
+          });
+        })
+        // catch error if password does not match
+        .catch((error) => {
+          response.status(400).send({
+            message: "Passwords does not match",
+            error,
+          });
+        });
+    })
+    // catch error if email does not exist
+    .catch((e) => {
+      response.status(404).send({
+        message: "Email not found",
+        e,
+      });
+    });
 });
-
 
 
 // logout endpoint`
 app.post('/logout', (req, res) => {
   const redirectUrl = "/";
   return res.json({ message : "Logout Successful", redirectUrl})
-})
+});
 
 // Start the server
 app.listen(PORT, () => {
