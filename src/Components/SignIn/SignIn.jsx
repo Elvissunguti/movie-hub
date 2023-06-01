@@ -7,7 +7,8 @@ const SignIn = () => {
     const [ password, setPassword] = useState('');
     const [ isFocusedEmail, setIsFocusedEmail] = useState(false);
     const [ isFocusedPassword, setIsFocusedPassword] = useState(false);
-
+    const [ error, setError ] = useState("");
+    
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -19,6 +20,7 @@ const SignIn = () => {
         };
     
         try {
+           
           const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
@@ -26,20 +28,26 @@ const SignIn = () => {
             },
             body: JSON.stringify(userData)
           });
+
+        
     
           if (response.ok) {
             // Success! User signed up successfully
             // You can redirect the user or show a success message
             navigate("/browse page")
             console.log('User signed up successfully');
+        
           } else {
             // Handle sign-up error
             // You can show an error message to the user
             console.error('Sign up failed');
+            setError('Wrong email or password');
           }
+
         } catch (error) {
           // Handle any network or server errors
           console.error('Error:', error);
+          
         }
       };
 
@@ -124,10 +132,13 @@ const SignIn = () => {
                             
                         </div>
                         <div>
+                        <div className='text-center text-red-500 md:text-lg'>
+                            <p>{error}</p>
+                        </div>
                             
                             <button type="Submit"
                              className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
-                                Sign In
+                               sign in 
                             </button>
                             
                         </div>
