@@ -21,7 +21,7 @@ const NavBar = () => {
   
         // Redirect to the specified page after logout
         navigate(data.redirectUrl);
-        setIsAuthenticated(true);
+        setIsAuthenticated(false);
       } catch (error) {
         console.error('Error:', error);
       }
