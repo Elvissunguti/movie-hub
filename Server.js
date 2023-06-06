@@ -146,9 +146,10 @@ app.post("/login", (request, response) => {
 
 // logout endpoint`
 app.post('/logout', (req, res) => {
-  const redirectUrl = "/";
-  return res.json({ message : "Logout Successful", redirectUrl})
-});
+
+  res.json({ message: 'Logout successful' });
+  });
+
 
 // Start the server
 app.listen(PORT, () => {

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 const SignIn = () => {
 
-    const [ email, setEmail] = useState('');
-    const [ password, setPassword] = useState('');
-    const [ isFocusedEmail, setIsFocusedEmail] = useState(false);
-    const [ isFocusedPassword, setIsFocusedPassword] = useState(false);
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ isFocusedEmail, setIsFocusedEmail ] = useState(false);
+    const [ isFocusedPassword, setIsFocusedPassword ] = useState(false);
     const [ error, setError ] = useState("");
     
     const navigate = useNavigate();
@@ -32,6 +33,10 @@ const SignIn = () => {
         
     
           if (response.ok) {
+
+               // Extract the token from the response
+            const data = await response.json();
+            const token = data.token;
             // Success! User signed up successfully
             // You can redirect the user or show a success message
             navigate("/browse page")
@@ -76,10 +81,11 @@ const SignIn = () => {
     }
     return(
         <section className="">
+            <NavBar />
             <div className="w-full h-screen mx-auto relative">
                 <div className="bg-custom absolute inset-0">
                     <form onSubmit={handleLogin}
-                    className="absolute w-full h-screen flex items-center justify-center flex-col ">
+                     className="absolute w-full h-screen flex items-center justify-center flex-col ">
                         <div className="bg-black py-28 px-16 bg-opacity-70">
                         <div className="flex flex-col space-y-5 items-center justify-center">
                             <h2 className="text-white text-3xl font-bold">Sign In</h2>
