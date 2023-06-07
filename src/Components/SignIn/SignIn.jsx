@@ -144,7 +144,7 @@ const SignIn = () => {
                             
                             <button type="Submit"
                              className="bg-red-800 text-white my-4 px-32 py-3 text-lg font-bold rounded-lg">
-                               sign in 
+                               Sign in 
                             </button>
                             
                         </div>

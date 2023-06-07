@@ -122,7 +122,6 @@ app.post("/login", (request, response) => {
           //   return success response
           response.status(200).send({
             message: "Login Successful",
-            email: user.email,
             token,
           });
         })
@@ -148,6 +147,30 @@ app.post("/login", (request, response) => {
 app.post('/logout', (req, res) => {
 
   res.json({ message: 'Logout successful' });
+  });
+
+  app.get('/api/check-authentication', (req, res) => {
+    try {
+      const token = req.headers.authorization;
+  
+      if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+      }
+  
+      // Verify the token
+      jwt.verify(token, "RANDOM-TOKEN", (err, decoded) => {
+        if (err) {
+          return res.status(401).json({ message: 'Invalid token' });
+        }
+  
+        // Token is valid
+        const { userId, userEmail } = decoded;
+        res.json({ isLoggedIn: true, userId, userEmail });
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error checking authentication' });
+    }
   });
 
 

@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.jpg";
 import { AiOutlineLogout } from "react-icons/ai";
+import axios from "axios";
 
 
 
 const NavBar = () => {
   const navigate = useNavigate();
 
-  const [ isAuthenticated, setIsAuthenticated ] = useState(true);
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/check-authentication', {
+          headers: { Authorization: localStorage.getItem('token') }
+        });
+        setIsAuthenticated(response.data.isLoggedIn);
+      } catch (error) {
+        console.log('Error checking authentication:', error);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -29,6 +45,7 @@ const NavBar = () => {
         localStorage.removeItem('token');
         // Redirect or perform any other desired action
         navigate("/"); // Redirect to the login page
+        setIsAuthenticated(false);
       } else {
         // Handle error if logout failed
         console.error('Logout failed');
@@ -40,7 +57,7 @@ const NavBar = () => {
       // Handle the error or show an error message to the user
     }
   };
-    const login = () => {
+    const handleLogin = () => {
       setIsAuthenticated(true)
     };
    
@@ -52,25 +69,23 @@ const NavBar = () => {
         </Link>
         <div className="flex flex-row items-center space-x-16">
             <ul className="items-center flex-row">
-        
             {isAuthenticated ? (
             <li className="p-4 hover:text-[#40AA54] text-[#16162E] active:text-[#40AA54] transition duration-500 focus:text-[#40AA54]">
-              <div >
-                <AiOutlineLogout className="cursor-pointer text-xl"  onClick={handleLogout} />
+              <div onClick={handleLogout}>
+                <AiOutlineLogout className="cursor-pointer text-xl" />
               </div>
             </li>
-          ) : null}
-          {!isAuthenticated ? (
+          ) : (
             <li>
               <Link
                 to="/sign in"
                 className="text-black text-xl font-bold"
-                onClick={login}
+                onClick={handleLogin}
               >
                 Sign In
               </Link>
             </li>
-          ) : null}
+          )}
   
             </ul>
         </div>
